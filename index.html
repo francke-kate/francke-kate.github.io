@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kate Francke</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --text-mid: #4a4a4a;
+      --text-light: #909090;
+      --border: #e8e8e8;
+      --ph-bg: #fffbeb;
+      --ph-border: #f0c040;
+      --ph-text: #7a5200;
+      --max: 860px;
+      --serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── NAV ──────────────────────────────────────── */
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 28px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-light);
+      text-decoration: none;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    /* ── SECTIONS ─────────────────────────────────── */
+
+    section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px 28px;
+    }
+
+    section.hidden {
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    section:not(.hidden) {
+      animation: fadeIn 0.2s ease;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 44px;
+    }
+
+    /* ── PLACEHOLDER ──────────────────────────────── */
+
+    .ph {
+      background: var(--ph-bg);
+      border: 1.5px dashed var(--ph-border);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-style: italic;
+      color: var(--ph-text);
+      font-size: 0.88em;
+      line-height: 1.6;
+      display: inline;
+    }
+
+    /* ── ABOUT ────────────────────────────────────── */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 183px;
+      gap: 52px;
+      align-items: start;
+    }
+
+    .about-name {
+      font-family: var(--serif);
+      font-size: 44px;
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
+    }
+
+    .about-subtitle {
+      font-size: 13.5px;
+      color: var(--text-light);
+      margin-bottom: 28px;
+      line-height: 1.6;
+      letter-spacing: 0.01em;
+    }
+
+    .about-body {
+      font-size: 15.5px;
+      line-height: 1.8;
+      color: var(--text-mid);
+    }
+
+    .about-body p + p {
+      margin-top: 14px;
+    }
+
+    .question-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 10px;
+    }
+
+    .question-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 10px;
+      font-size: 15.5px;
+      line-height: 1.8;
+      color: var(--text-mid);
+    }
+
+    .question-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text-light);
+    }
+
+    .about-links {
+      margin-top: 30px;
+      display: flex;
+      gap: 22px;
+    }
+
+    .about-links a {
+      font-size: 13px;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: border-color 0.15s;
+    }
+
+    .about-links a:hover {
+      border-color: var(--text);
+    }
+
+    .headshot-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 9px;
+      padding-top: 6px;
+    }
+
+    .headshot {
+      width: 175px;
+      height: 175px;
+      border-radius: 50%;
+      background: #f2f2f0;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .headshot img {
+      width: 110%;
+      height: 110%;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: -5%;
+    }
+
+    .headshot-monogram {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 400;
+      color: #c8c8c4;
+      letter-spacing: -0.02em;
+      user-select: none;
+    }
+
+    .headshot-note {
+      font-size: 10.5px;
+      color: var(--text-light);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* ── WRITING ──────────────────────────────────── */
+
+    .writing-intro {
+      font-size: 15px;
+      color: var(--text-mid);
+      margin-bottom: 44px;
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    .writing-item {
+      padding: 30px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .writing-item:last-of-type {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .item-meta {
+      font-size: 11px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 9px;
+    }
+
+    .item-title {
+      font-family: var(--serif);
+      font-size: 21px;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 11px;
+    }
+
+    .item-title a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+
+    .item-title a:hover {
+      border-bottom-color: var(--text);
+    }
+
+    .item-body {
+      font-size: 14.5px;
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+
+    .influences {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .influences-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+
+    .influences-body {
+      font-size: 14.5px;
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+
+    .influences-body p + p {
+      margin-top: 12px;
+    }
+
+    /* ── RESEARCH ─────────────────────────────────── */
+
+    .research-item {
+      padding: 30px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .research-item:last-of-type {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .research-role {
+      font-family: var(--serif);
+      font-size: 21px;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .research-meta {
+      font-size: 12px;
+      color: var(--text-light);
+      letter-spacing: 0.02em;
+      margin-bottom: 13px;
+    }
+
+    .research-body a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.15s;
+    }
+
+    .research-body a:hover {
+      border-color: var(--text);
+    }
+
+    .research-body {
+      font-size: 14.5px;
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+
+    /* ── PROJECTS ─────────────────────────────────── */
+
+    .project-item {
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .project-item:last-of-type {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 9px;
+      flex-wrap: wrap;
+    }
+
+    .project-name {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    .project-tech {
+      font-size: 11px;
+      color: var(--text-light);
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+
+    .project-body {
+      font-size: 14.5px;
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+
+    /* ── FOOTER ───────────────────────────────────── */
+
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 36px 28px 52px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-light);
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    footer a:hover {
+      color: var(--text);
+    }
+
+    /* ── MOBILE ───────────────────────────────────── */
+
+    @media (max-width: 620px) {
+      section {
+        padding: 60px 20px;
+      }
+
+      .nav-inner {
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        gap: 18px;
+      }
+
+      .nav-links a {
+        font-size: 11px;
+      }
+
+      .about-grid {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 28px;
+      }
+
+      .headshot-col {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 16px;
+      }
+
+      .headshot {
+        width: 72px;
+        height: 72px;
+      }
+
+      .headshot-monogram {
+        font-size: 18px;
+      }
+
+      .about-name {
+        font-size: 34px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        padding: 32px 20px 44px;
+      }
+
+      .project-header {
+        flex-direction: column;
+        gap: 3px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#about" class="nav-name">Kate Francke</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#projects">Projects</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- ── ABOUT ──────────────────────────────────── -->
+
+  <section id="about">
+    <p class="section-label">About</p>
+    <div class="about-grid">
+
+      <div class="about-content">
+        <h1 class="about-name">Kate Francke</h1>
+        <p class="about-subtitle">
+          Technologist and Translator
+        </p>
+        <div class="about-body">
+          <p>Hi, I'm Kate Francke, a recent dual degree graduate from Columbia University and Sciences Po, where I studied Computer Science and Economics. But unlike most of my classmates, I wasn't drawn to coding because of an innate love of logic. I came to it hesitantly: I chose these fields because they increasingly dictate everything else. Attention economies shape what we believe. Automated systems decide who gets housing, healthcare, bail. Consumerism is now an algorithm.</p>
+          <p>This intersection of technology with our human lives cannot be overlooked, but we shouldn't all need to understand language models, linked lists, and binary code to use these tools safely or know when they're being misused. <strong>I studied computer science to act as a translator for the people affected by these systems but not consulted in building them.</strong></p>
+          <p><strong>The questions I'm most interested in right now:</strong></p>
+          <ul class="question-list">
+            <li>How do we build technology that works for public good, and who gets to decide what that means?</li>
+            <li>How do we bring these tools to the communities that need them most, without the tools themselves becoming another source of harm — by reinforcing datasets built on skewed histories, knowledge systems that mistake Western defaults for universal truth, attention economies that profit from isolation and outrage.</li>
+            <li>When a handful of private companies control the infrastructure of public life, how do we keep them accountable?</li>
+          </ul>
+          <p>I'm a technologist in training, but when I'm not typing away at my computer, I'm playing rugby, practicing my paradiddles on the drums, or dreaming about my future surf career (I can't surf yet but I'm fully bought into the lifestyle).</p>
+        </div> 
+        <div class="about-links">
+          <a href="https://linkedin.com/in/kate-francke" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/francke-kate" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+
+      <div class="headshot-col">
+        <div class="headshot">
+          <img src="headshot.jpg" alt="Kate Francke">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ── WRITING & ADVOCACY ─────────────────────── -->
+
+  <section id="writing">
+    <p class="section-label">Writing &amp; Advocacy</p>
+
+    <p class="writing-intro">
+      Two years into this work and I still have much to learn in both the technical and advocacy spaces. But moving between 
+      big picture thinking and technical intricacies, between international contexts and local policy, is what I think makes me useful as a bridge 
+      between the people building these systems and the people living with them.
+
+    <div class="writing-item">
+      <p class="item-meta">Op-Ed &nbsp;&middot;&nbsp; The Buffalo News &nbsp;&middot;&nbsp; 2025</p>
+      <h2 class="item-title">
+        <a href="https://buffalonews.com/opinion/article_f3e84eb0-c5d3-40b9-b99c-f33e4b2ca84d.html"
+           target="_blank" rel="noopener noreferrer">
+          Students face rules. Why don't AI companies?
+        </a>
+      </h2>
+      <p class="item-body">
+        Co-authored an op-ed urging Governor Hochul to sign the RAISE Act, which requires companies
+        spending over $100M training frontier AI models to document safety plans and report serious
+        incidents within 72 hours. She signed it five days later. New York became the second state
+        with comprehensive frontier AI safety legislation.
+      </p>
+    </div>
+
+    <div class="writing-item">
+      <p class="item-meta">Columbia University &nbsp;&middot;&nbsp; Founded Fall 2025</p>
+      <h2 class="item-title">Young People's Alliance, Columbia Chapter</h2>
+      <p class="item-body">
+        Founded Columbia's chapter with one goal: empower students to engage with legislation, advocacy, and the policies shaping our digital world.
+        Technology is far from apolitical, and students, developers, policymakers, and consumers should all be involved in shaped our technological future.
+        Interviewed Henry Josephson, legislative aide to Assemblymember Alex Bores (73rd District), to map how AI policy travels from research through to enforcement.
+      </p>
+    </div>
+
+    <div class="influences">
+      <p class="influences-label">Intellectual Influences</p>
+      <ul class="question-list">
+        <li>Joy Buolamwini — on whose face these systems fail, and why that's a choice</li>
+        <li>Shoshana Zuboff, <em>The Age of Surveillance Capitalism</em> — tracking behavior isn't a bug, it's the product</li>
+        <li>Tim Wu, <em>The Age of Extraction</em> — platforms profit by draining attention, not adding value</li>
+      </ul>
+    </div>
+
+  </section>
+
+
+  <!-- ── RESEARCH ────────────────────────────────── -->
+
+  <section id="research">
+    <p class="section-label">Research</p>
+
+    <div class="research-item">
+      <h2 class="research-role">Research Assistant, CAIAC Model Diffing Group</h2>
+      <p class="research-meta">Columbia University &nbsp;&middot;&nbsp; January – May 2025</p>
+      <p class="research-body">
+        What actually changes inside a neural network when you train it differently?
+        I worked on analyzing attention mechanisms in transformer models before and after GRPO
+        fine-tuning, using PyTorch to visualize how information flows through layers, track
+        structural shifts, and examine induction heads. Unfortunately, we didn't publish any work, 
+        as the project turned out to be more ambitious than the timeline allowed. 
+        Still, I came away with a working understanding of transformers and attention mechanisms, 
+        a clearer sense of how research actually gets structured and delegated, and a firsthand 
+        experience of the technical barriers to understanding AI. The layers of detail are genuinely 
+        overwhelming, and a semester barely scratches the surface. But it was enough to understand why 
+        translation matters, and to develop a real respect for how much technical depth this work requires.
+      </p>
+    </div>
+
+    <div class="research-item">
+      <h2 class="research-role">Columbia AI Alignment Fellow</h2>
+      <p class="research-meta">Columbia University &nbsp;&middot;&nbsp; Spring 2025</p>
+      <p class="research-body">
+        A structured reading group working through a
+        <a href="https://docs.google.com/document/d/14gOLPczbGpESK2iae1dii0aVCAMIKnCb4pIp6bLkaeg/edit?tab=t.0#heading=h.405k3cypt7w4"
+           target="_blank" rel="noopener noreferrer">curated AI safety curriculum</a>
+        covering catastrophic risks, interpretability techniques, and governance frameworks. 
+        We met weekly to read and discuss material. We covered many topics, but one paper that stuck
+        with me was Sastry et al.'s <a href="https://arxiv.org/abs/2402.08797" target="_blank" rel="noopener noreferrer">Computing Power and the Governance of Artificial Intelligence</a>, which
+        discussed how compute might be one of the few places where regulation is actually feasible. Unlike data or algorithms, compute
+         runs on chips in data centers, which gives it a physical footprint that can, in theory, 
+         be monitored and controlled. But the paper also highlights why this might be harder than at first glance. When a small number of companies control compute, 
+         they also control who gets to build AI systems, what it gets used for, and who can audit it. 
+        Meaningful oversight would require access to their data centers, their training logs, their internal 
+        processes, and the legal frameworks we have were not built to compel that kind of technical transparency from companies operating at this 
+        scale, across borders, and faster than most legislation can move.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- ── PROJECTS ────────────────────────────────── -->
+
+  <section id="projects">
+    <p class="section-label">Technical Projects</p>
+
+    <div class="project-item">
+      <div class="project-header">
+        <h3 class="project-name">OceanTemp PCA Analysis</h3>
+        <span class="project-tech">Python &nbsp;&middot;&nbsp; Jupyter</span>
+      </div>
+      <p class="project-body">
+        800,000 years of climate history, stored in Antarctic ice cores as trace concentrations of
+        CO₂, methane, dust, and isotopes. This project used Principal Component Analysis — a
+        technique for finding the underlying signals in high-dimensional data — to reconstruct
+        global mean ocean temperatures from those proxy measurements. A way of asking: how much can
+        ancient air tell us about where temperatures are headed?
+      </p>
+    </div>
+
+    <div class="project-item">
+      <div class="project-header">
+        <h3 class="project-name">Beautiful Venmo</h3>
+        <span class="project-tech">Python &nbsp;&middot;&nbsp; FastAPI</span>
+      </div>
+      <p class="project-body">
+        A decentralized payment ledger — no bank, no central server, just cryptography. Built as a
+        three-layer system: an application layer for user interaction, a blockchain layer that
+        validates transactions and checks cryptographic signatures, and a peer-to-peer network where
+        nodes share new blocks and mine them in competition. Team project.
+      </p>
+    </div>
+
+    <div class="project-item">
+      <div class="project-header">
+        <h3 class="project-name">Reliable Transport Protocol</h3>
+        <span class="project-tech">Python</span>
+      </div>
+      <p class="project-body">
+        The internet's delivery guarantees — your file will arrive whole and in order — are built on
+        top of a layer that offers none of those guarantees. This project rebuilds them from scratch
+        over UDP: a three-way handshake to open connections, a sliding window to pace data,
+        checksums to catch corruption, and automatic retransmission when packets go missing. A
+        ground-up implementation of how TCP works.
+      </p>
+    </div>
+
+    <div class="project-item">
+      <div class="project-header">
+        <h3 class="project-name">Distance Vector Routing</h3>
+        <span class="project-tech">Python</span>
+      </div>
+      <p class="project-body">
+        How does data find its way across the internet when no single node can see the whole map?
+        This project implements the Bellman-Ford routing algorithm: each node knows only its
+        immediate neighbors, but by continuously sharing and comparing routing tables, the whole
+        network converges on the cheapest path between any two points.
+      </p>
+    </div>
+
+    <div class="project-item">
+      <div class="project-header">
+        <h3 class="project-name">Adaptive Bitrate Streaming</h3>
+        <span class="project-tech">Python</span>
+      </div>
+      <p class="project-body">
+        Video streaming that adjusts quality based on connection speed — the mechanism behind why
+        YouTube drops to 480p when Wi-Fi gets spotty. This client uses an exponentially weighted
+        moving average to estimate available bandwidth in real time, then selects the highest-quality
+        chunk that fits. Includes the network simulator built to test it.
+      </p>
+    </div>
+
+    <div class="project-item">
+      <div class="project-header">
+        <h3 class="project-name">TCP Web Server</h3>
+        <span class="project-tech">C</span>
+      </div>
+      <p class="project-body">
+        An HTTP server that handles both static files and dynamic requests backed by database
+        lookups. Also includes a command-line file downloader — a stripped-down version of wget.
+      </p>
+    </div>
+
+    <div class="project-item">
+      <div class="project-header">
+        <h3 class="project-name">Memory &amp; Systems Labs</h3>
+        <span class="project-tech">C</span>
+      </div>
+      <p class="project-body">
+        A series of low-level systems programming exercises: linked lists, custom memory allocators,
+        and programs verified clean by Valgrind — the standard tool for catching memory leaks and
+        illegal memory access. Zero leaks across all submissions.
+      </p>
+    </div>
+
+    <div class="project-item">
+      <div class="project-header">
+        <h3 class="project-name">2D Adventure Game</h3>
+        <span class="project-tech">Godot</span>
+      </div>
+      <p class="project-body">
+        Built at Columbia LionJam 2025, a 24-hour game jam.
+      </p>
+    </div>
+
+  </section>
+
+
+  <footer>
+    <span>Kate Francke</span>
+    <span>
+      <a href="mailto:kef2152@columbia.edu">kef2152@columbia.edu</a>
+    </span>
+  </footer>
+
+
+  <script>
+    const allSections = document.querySelectorAll('section[id]');
+    const navLinks    = document.querySelectorAll('.nav-links a');
+
+    function showSection(id) {
+      allSections.forEach(function(s) { s.classList.add('hidden'); });
+      document.getElementById(id).classList.remove('hidden');
+      navLinks.forEach(function(a) {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      });
+      window.scrollTo(0, 0);
+    }
+
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        showSection(this.getAttribute('href').slice(1));
+      });
+    });
+
+    document.querySelector('.nav-name').addEventListener('click', function(e) {
+      e.preventDefault();
+      showSection('about');
+    });
+
+    // Start on About
+    showSection('about');
+  </script>
+
+</body>
+</html>
